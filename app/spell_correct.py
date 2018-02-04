@@ -10,6 +10,30 @@ with open('app/assets/en-use-case.txt') as f:
 # create counter for each word to find popularity
 dictionary = Counter(re.findall(r'\w+', dictionary.lower()))
 total_words = sum(dictionary.values())
+
+# rules for soundex
+rules = ['aeiouyhw', 'bfpv', 'cgjkqsxz', 'dt', 'l', 'mn', 'r']
+
+def find_soundex(word):
+    if word:
+        soundex = word[0]
+        for i in range(1, len(word)):
+            for j, rule in enumerate(rules):
+                if word[i] in rule:
+                    soundex += str(j)
+                    break
+        soundex = ''.join(OrderedDict.fromkeys(soundex).keys())
+        soundex = soundex.replace('0', '')
+        return soundex
+
+# create soudex code for each word
+soundex_dict = {}
+for word in dictionary:
+    soundex = find_soundex(word)
+    if soundex in soundex_dict:
+        soundex_dict[soundex].append(word)
+    else:
+        soundex_dict[soundex] = [word]
     
 def spell_correct(words):
     words = [word.strip() for word in words if isinstance(word, str)]
@@ -20,7 +44,7 @@ def spell_correct(words):
     return result
 
 def correction(word):
-    possible_corrections = candidates(word)
+    possible_corrections = candidates_soundex(word)
     print([(w, popularity(w)) for w in possible_corrections])
     return max(possible_corrections, key=popularity)
 
@@ -49,3 +73,7 @@ def edits2(word):
     "All edits that are two edits away from `word`."
     return (e2 for e1 in edits1(word) for e2 in edits1(e1))
 
+def candidates_soundex(word):
+    soundex = find_soundex(word)
+    print(soundex)
+    return (soundex_dict[soundex] if soundex in soundex_dict else [word])
