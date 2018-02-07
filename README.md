@@ -7,12 +7,13 @@ https://spell-correct.herokuapp.com/spellcorrect/
 
 - Using `GET` method: pass the words separated by comma to `words` parameter
 ```bash
- curl https://spell-correct.herokuapp.com/spellcorrect/?words=prouciation,speling,apliction
+ curl 'https://spell-correct.herokuapp.com/spellcorrect/?format=json&words=prouciation,speling,apliction'
  ```
 - Same can also be achieved with `POST` request by passing words as a json:
 ```bash
-curl -d '{"words":["prouciation, speling, apliction"]}' \
-https://herokuapp.com/spellcorrect/
+curl -d '{"words":["prouciation", "speling", "apliction"]}' \
+     -H 'Content-Type: application/json' \
+     'https://spell-correct.herokuapp.com/spellcorrect/'
 ```
 
 ## Development Setup

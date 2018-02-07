@@ -33,7 +33,7 @@ class SpellCorrect(APIView):
             if isinstance(words, list):
                 res = spell_correct(words, request.data.get('method'))
             else:
-                res = {"details": "Expecting a list of words"}
+                res = {"details": "Expecting a list of words with content-type set to application/json"}
                 stat = status.HTTP_400_BAD_REQUEST
 
         return Response(res, status=stat)
