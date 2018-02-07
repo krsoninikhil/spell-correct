@@ -18,7 +18,7 @@ class SpellCorrect(APIView):
         res = None
         if 'words' in request.query_params:
             words = request.query_params['words'].split(',')
-            res = spell_correct(words)
+            res = spell_correct(words, request.query_params.get('method'))
         
         return Response(res, status=status.HTTP_200_OK)
         
@@ -31,7 +31,7 @@ class SpellCorrect(APIView):
         if 'words' in request.data:
             words = request.data['words']
             if isinstance(words, list):
-                res = spell_correct(words)
+                res = spell_correct(words, request.data.get('method'))
             else:
                 res = {"details": "Expecting a list of words"}
                 stat = status.HTTP_400_BAD_REQUEST
