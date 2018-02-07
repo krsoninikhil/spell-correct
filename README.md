@@ -1,18 +1,18 @@
 ## SpellCorrect
 
 A django based REST interface for correcting spellings, can be tested at -
-https://spell-correct.herokuapp.com
+https://spell-correct.herokuapp.com/spellcorrect/
 
 ## Demo Usage
 
 - Using `GET` method: pass the words separated by comma to `words` parameter
 ```bash
- curl https://spell-correct.herokuapp.com/?words=pronunciation,speling,apliction
+ curl https://spell-correct.herokuapp.com/spellcorrect/?words=prouciation,speling,apliction
  ```
 - Same can also be achieved with `POST` request by passing words as a json:
 ```bash
 curl -d '{"words":["prouciation, speling, apliction"]}' \
-https://herokuapp.com/
+https://herokuapp.com/spellcorrect/
 ```
 
 ## Development Setup
