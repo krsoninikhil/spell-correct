@@ -27,7 +27,11 @@ git clone https://github.com/krsoninikhil/spell-correct.git
 sudo pip install -r requirements.txt
 ```
 - It uses `djangorestframework` for api implementation.
-- Start server with:
+- Runs tests using:
+```bash
+python manage.py test
+```
+- If all tests are passing, start the server with:
 ```bash
 python manage.py runserver
 ```

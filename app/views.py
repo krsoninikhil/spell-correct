@@ -19,9 +19,8 @@ class SpellCorrect(APIView):
         if 'words' in request.query_params:
             words = request.query_params['words'].split(',')
             res = spell_correct(words, request.query_params.get('method'))
-        
         return Response(res, status=status.HTTP_200_OK)
-        
+
     def post(self, request):
         '''
         Expects a list of words with content-type: application/json.
@@ -37,4 +36,3 @@ class SpellCorrect(APIView):
                 stat = status.HTTP_400_BAD_REQUEST
 
         return Response(res, status=stat)
-       
